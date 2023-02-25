@@ -7,7 +7,7 @@ import Error from "./pages/Error";
 import MainDashBoard from "./pages/MainDashBoard";
 import ClaimsDashboard from "./pages/ClaimsDashboard";
 import CreateClaim, { action as CreateClaimAction } from "./pages/CreateClaim";
-
+import Login from "./pages/Login";
 function App() {
   let router = createBrowserRouter([
     {
@@ -25,6 +25,7 @@ function App() {
         },
         { path: "editClaim" },
         { path: "removeClaim" },
+        { path: "/login", element: <Login /> },
       ],
     },
   ]);
