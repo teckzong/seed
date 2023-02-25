@@ -1,7 +1,13 @@
 import React from "react";
 
 const Transaction = () => {
-  return <p>
+  return (<>
+           <div class="position-relative overflow-hidden text-center bg-light">
+          <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 font-weight-heavy">What would you like to do today?</h1>
+            </div>
+            </div>
+  <p>
       <div className="h-100 d-flex align-items-center justify-content-center">
       <div class="row h-100 d-flex align-items-center justify-content-center">
         <div class="col-sm-3">
@@ -36,7 +42,7 @@ const Transaction = () => {
         </div>
     </div>
     </div>
-  </p>;
+  </p></>)
 };
 
 export default Transaction;

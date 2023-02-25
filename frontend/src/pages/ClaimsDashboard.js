@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import {useNavigate} from "react-router-dom"
 
 const ClaimsDashboard = () => {
   const [employeeClaims, setEmployeeClaims] = useState([]);
@@ -47,6 +47,14 @@ const ClaimsDashboard = () => {
     month: "long",
     day: "numeric",
   };
+
+  const EditButton = (claimID) => {
+    const natigate = useNavigate();
+     return (
+    <>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={natigate("/editclaim")}>Edit Claim</button>
+    </>)
+  }
 
   const deleteButton = (claimID) => {
     return (
@@ -118,7 +126,7 @@ const ClaimsDashboard = () => {
               <td>{claim["PreviousClaimID"]}</td>
               <td>{claim["Status"]}</td>
               <td>{Date(Date.parse(claim["LastEditedClaimDate"]))}</td>
-              <td>{deleteButton(claim["ClaimID"])}</td>
+              <td>{EditButton(claim["ClaimID"])}{deleteButton(claim["ClaimID"])}</td>
             </tr>
           );
         })}
