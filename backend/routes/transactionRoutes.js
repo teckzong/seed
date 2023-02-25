@@ -13,7 +13,7 @@ router.post('/create-claim', (req, res) => {
         return res.status(422).send(resResult(0, "Claim is null!"));
     }
     try{
-        con.query("INSERT INTO user SET ?", claim, (err, result) =>{
+        con.query("INSERT INTO InsuranceClaims SET ?", claim, (err, result) =>{
             if(err){
                 res.send(err);
             } else {
