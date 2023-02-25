@@ -3,8 +3,6 @@ import { useState, useRef, useContext, useEffect } from "react";
 import axios from 'axios';
 import AuthContext from "../context/AuthProvider";
 
-const LOGIN_URL = '/auth';
-
 const Login = () => {
     const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
@@ -23,11 +21,27 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const formInfo = {
+            EmployeeID: newUsername,
+            Password: password,
+        };
+
+
+        // fetch("/login", {
+        //     method: "POST",
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(formInfo)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => console.log(data))
+
+
         try {
-            const response = await axios.post(LOGIN_URL,
+            const response = await axios.post('/login',
                 JSON.stringify({ newUsername, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formInfo),
                     withCredentials: true
                 }
             );
@@ -75,17 +89,17 @@ const Login = () => {
                         <h2 className="loginText"> Login to view your insurance claims and policies </h2>
                         <form className="loginForm" onSubmit={handleSubmit}>
                             <div className="inputWrapper">
-                            <p>
-                                <label>Employee ID: </label>
-                                <input type="text" id="username" onChange={(e) => setNewUsername(e.target.value)} autoComplete="off" value={newUsername} required></input>
-                            </p>
+                                <p>
+                                    <label>Employee ID: </label>
+                                    <input type="text" id="username" onChange={(e) => setNewUsername(e.target.value)} autoComplete="off" value={newUsername} required></input>
+                                </p>
 
-                            <p>
-                                <label>Password: </label>
-                                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} autoComplete="off" value={password} required></input>
-                            </p>
-                            
-                            <button>Login</button>
+                                <p>
+                                    <label>Password: </label>
+                                    <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} autoComplete="off" value={password} required></input>
+                                </p>
+
+                                <button>Login</button>
 
                             </div>
                         </form>
