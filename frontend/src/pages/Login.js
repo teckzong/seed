@@ -67,15 +67,19 @@ const Login = () => {
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 
                     <div className="login">
-                        <p> Login to view your insurance claims and policies</p>
-                        <form onSubmit={handleSubmit}>
+                        <div className="loginImage">
+                            <img src="/loginImage.jpg" alt="loginImage" height="400px" />
+                        </div>
+                        <h2 className="loginText"> Login to view your insurance claims and policies </h2>
+                        <form className="loginForm" onSubmit={handleSubmit}>
                             <p>
-                                <label>Employee ID</label>
-                                <input type="text" id="username" onChange={(e) => setNewUsername(e.target.value)} autocomplete="off" value={newUsername} required></input>
+                                <label>Employee ID: </label>
+                                <input type="text" id="username" onChange={(e) => setNewUsername(e.target.value)} autoComplete="off" value={newUsername} required></input>
                             </p>
+
                             <p>
-                                <label>Password</label>
-                                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} autocomplete="off" value={password} required></input>
+                                <label>Password: </label>
+                                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} autoComplete="off" value={password} required></input>
                             </p>
 
                             <button>Login</button>
