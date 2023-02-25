@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
-import { useState, useRef } from "react";
+import React from "react";
+import { useState, useRef, useContext, useEffect } from "react";
+import axios from 'axios';
+import AuthContext from "../context/AuthProvider";
+
+const LOGIN_URL = '/auth';
 
 const Login = () => {
-
-    const database = {
-        "EmployeeID": "58001001",
-        "Password": "iLoveTT!23",
-    };
-
+    const { setAuth } = useContext(AuthContext);
     const userRef = useRef();
     const errRef = useRef();
 
@@ -22,36 +21,73 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(newUsername, password);
-        setNewUsername("");
-        setPassword("");
-        setSuccess(true)
 
-        return (
-            console.log("submitted")
-        );
+        try {
+            const response = await axios.post(LOGIN_URL,
+                JSON.stringify({ newUsername, password }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response));
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
+            setAuth({ newUsername, password, roles, accessToken });
+            setNewUsername('');
+            setPassword('');
+            setSuccess(true);
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('Login Failed');
+            }
+            errRef.current.focus();
+        }
     }
 
-return (
-    <div className="login">
-        <p> Login to view your insurance claims and policies</p>
-        <form onSubmit={handleSubmit}>
-            <p>
-                <label>Employee ID</label>
-                <input type="text" id="username" onChange={(e) => setNewUsername(e.target.value)} autocomplete="off" value={newUsername} required></input>
-            </p>
-            <p>
-                <label>Password</label>
-                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} autocomplete="off" value={password} required></input>
-            </p>
+    return (
+        <>
+            {success ? (
+                <section>
+                    <h1>You are logged in!</h1>
+                    <br />
+                    <p>
+                        <a href="/">Go to Home</a>
+                    </p>
+                </section>
+            ) : (
+                <section>
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 
-            <button>Login</button>
+                    <div className="login">
+                        <p> Login to view your insurance claims and policies</p>
+                        <form onSubmit={handleSubmit}>
+                            <p>
+                                <label>Employee ID</label>
+                                <input type="text" id="username" onChange={(e) => setNewUsername(e.target.value)} autocomplete="off" value={newUsername} required></input>
+                            </p>
+                            <p>
+                                <label>Password</label>
+                                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} autocomplete="off" value={password} required></input>
+                            </p>
 
-            <p>{newUsername}</p>
-            <p>{password}</p>
-        </form>
-    </div>
-);
+                            <button>Login</button>
+
+                            <p>{newUsername}</p>
+                            <p>{password}</p>
+                        </form>
+                    </div>
+                </section>
+            )}
+        </>
+    )
 
 };
 
