@@ -7,7 +7,10 @@ import Error from "./pages/Error";
 import ClaimsDashboard from "./pages/ClaimsDashboard";
 import CreateClaim, { action as CreateClaimAction } from "./pages/CreateClaim";
 import Login from "./pages/Login";
-import EditClaim, { loader as claimInfoLoader } from "./pages/EditClaim";
+import EditClaim, {
+  loader as claimInfoLoader,
+  action as editClaimAction,
+} from "./pages/EditClaim";
 function App() {
   let router = createBrowserRouter([
     {
@@ -29,6 +32,8 @@ function App() {
           path: ":insuranceId/editClaim",
           element: <EditClaim />,
           loader: claimInfoLoader,
+          action: editClaimAction,
+          t,
         },
       ],
     },

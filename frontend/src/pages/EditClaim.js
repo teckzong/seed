@@ -1,16 +1,29 @@
 import React from "react";
 import { json, redirect, useLoaderData } from "react-router-dom";
+import EditClaimForm from "../components/EditClaimForm";
 
 const EditClaimPage = () => {
   const claimData = useLoaderData();
-  return <div></div>;
+  return <EditClaimForm data={claimData}></EditClaimForm>;
 };
 
 export default EditClaimPage;
 
 export const loader = async ({ params, request }) => {
   console.log("retrieving suppose data");
-  return {};
+  return {
+    ClaimID: 2010,
+    InsuranceID: 1009,
+    FirstName: "Martin",
+    LastName: "Ong",
+    ExpenseDate: "2022-07-14",
+    Amount: 100.0,
+    Purpose: "Dentist",
+    FollowUp: 0,
+    PreviousClaimID: null,
+    Status: "Approved",
+    LastEditedClaimDate: "2022-07-15T12:22:45+08:00",
+  };
   // let response = await fetch("http:localhost:8080", {
   //   method: "GET",
   //   headers: {
@@ -49,6 +62,6 @@ export const action = async ({ params, request }) => {
   //   if (!response.ok) {
   //     throw json({ error: 404, message: "error creating claim" });
   //   }
-  window.alert("Successfully created claim");
-  return redirect("/claimdashboard");
+  window.alert("Edited claim");
+  return redirect("/dashboard");
 };
