@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import {useNavigate} from "react-router-dom"
 
 const ClaimsDashboard = () => {
@@ -110,6 +111,7 @@ const ClaimsDashboard = () => {
       </thead>
       <tbody>
         {employeeClaims.map((claim) => {
+
           console.log(claim);
           ClaimNumber++;
           return (

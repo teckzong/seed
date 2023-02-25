@@ -4,12 +4,13 @@ const con = require('../connection.js');
 
 
 router.get('/', (req, res) => {
-    let id = req.body;
+    const { EmployeeID } = req.body;
+
     con.query(`SELECT IC.*
     FROM InsuranceClaims IC LEFT JOIN InsurancePolicies IP
     ON IC.InsuranceID = IP.InsuranceID
     WHERE IP.EmployeeID =?`
-    ,id, (err, result) =>{
+    ,EmployeeId, (err, result) =>{
         if(err){
             res.send(err);
         } else {
