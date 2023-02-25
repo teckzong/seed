@@ -7,7 +7,7 @@ const Transaction = () => {
         <div class="col-sm-3">
           <div class="card">
             <div class="card-body">
-              <div class="row"><img src="view_claim.jpg" class=""></img></div>
+              <div class="row h-5 w-5"><img src="view_claim.jpg" class="img-fluid"></img></div>
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -17,7 +17,7 @@ const Transaction = () => {
         <div class="col-sm-3">
           <div class="card">
             <div class="card-body">
-              <div class="row"><img src="view_claim.jpg" class=""></img></div>
+              <div class="row h-5 w-5"><img src="view_claim.jpg" class="img-fluid"></img></div>
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <a href="#" class="btn btn-primary">Go somewhere</a>
@@ -27,7 +27,7 @@ const Transaction = () => {
         <div class="col-sm-3">
           <div class="card">
             <div class="card-body">
-              <div class="row"><img src="view_claim.jpg" class=""></img></div>
+              <div class="row h-5 w-5"><img src="view_claim.jpg" class="img-fluid"></img></div>
               <h5 class="card-title">Special title treatment</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <a href="#" class="btn btn-primary">Go somewhere</a>
