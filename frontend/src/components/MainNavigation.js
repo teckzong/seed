@@ -20,12 +20,12 @@ const MainNavigation = () => {
               </Link>
           </a>
           <a class="py-2 d-none d-md-inline-block">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/dashboard">
                 My Dashboard
               </Link>
           </a>
           <a class="py-2 d-none d-md-inline-block">
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/login">
                 Login
               </Link>
           </a>
