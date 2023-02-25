@@ -11,46 +11,44 @@ const requireAuth = require('../middlewares/requireAuth');
 
 router.post('/', (req, res) => {
     const claim = req.body;
-    let insurancePolicy
-    try{
-        con.query("Select *, Timestamp(PolicyEndDate) as PolicyEndDate_ts from InsurancePolicies where InsuranceID = ?", claim.InsuranceID, (err, result) =>{
-            insurancePolicy = result;
-        })
-
-    }
-    catch (err){
-        console.log(err.message)
-    }
-    console.log(insurancePolicy);
 
     if(!claim){
         console.log("err")
         //return res.status(422).send(resResult(0, "Claim is null!"));
     }
+    try{
+        con.query("Select *, Timestamp(PolicyEndDate) as PolicyEndDate_ts from InsurancePolicies where InsuranceID = ?", claim.InsuranceID, (err, ip) =>{
+            if(claim.amount > ip.ClaimLimit || claim.ExpenseDate > ip.PolicyEndDate_ts){
+                // return res.status(422).send(resResult(0, "Invalid claim, please check amount or expense date"));
+                console.log("err")
 
-    if(claim.amount > insurancePolicy.ClaimLimit || claim.ExpenseDate > insurancePolicy.PolicyEndDate_ts){
-        // return res.status(422).send(resResult(0, "Invalid claim, please check amount or expense date"));
-        console.log("err")
+                const currentDate = new Date();
+                const timestamp = currentDate.getTime();
+                claim['Status'] = "Pending";
+                claim['LastEditedClaimDate'] = timestamp;
+                con.query("INSERT INTO InsuranceClaims value ?", claim, (err, result) =>{
+                    if(err){
+                        console.log("err")
+                        //return res.status(422).send(resResult(0, "Save DB error"));//err.message
+                    } else {
+                        //todo decide ltr
+                        // res.send({
+                        //     info : result,
+                        //     res: "User registered"
+                        // });
+                        //res.send(resResult(1, 'Successfully create claim', null));
+                        console.log("saved")
+                    }
+                });
+            }
+        })
+    }
+    catch(err){
+        console.log(err)
     }
 
-        const currentDate = new Date();
-        const timestamp = currentDate.getTime();
-        claim['Status'] = "Pending";
-        claim['LastEditedClaimDate'] = timestamp;
-        con.query("INSERT INTO InsuranceClaims value ?", claim, (err, result) =>{
-            if(err){
-                console.log("err")
-                //return res.status(422).send(resResult(0, "Save DB error"));//err.message
-            } else {
-                //todo decide ltr
-                // res.send({
-                //     info : result,
-                //     res: "User registered"
-                // });
-                //res.send(resResult(1, 'Successfully create claim', null));
-                console.log("saved")
-            }
-        });
+
+
 
 
         //return res.status(422).send(resResult(0, "Save DB error"));//err.message
