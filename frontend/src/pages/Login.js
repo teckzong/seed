@@ -22,10 +22,9 @@ const Login = () => {
         e.preventDefault();
 
         const formInfo = {
-            EmployeeID: newUsername,
+            EmployeeID: parseInt(newUsername),
             Password: password,
         };
-
 
         // fetch("/login", {
         //     method: "POST",
@@ -34,8 +33,7 @@ const Login = () => {
         // })
         //     .then(res => res.json())
         //     .then(data => console.log(data))
-
-
+ 
         try {
             const response = await axios.post('/login',
                 JSON.stringify({ newUsername, password }),
