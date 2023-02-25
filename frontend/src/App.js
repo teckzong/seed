@@ -16,10 +16,8 @@ function App() {
       errorElement: <Error />,
       children: [
         { index: true, element: <Home /> },
-        { path: "main", element: <MainDashBoard /> },
         { path: "transactions", element: <Transaction /> },
-        { path: "claimsdashboard", element: <ClaimsDashboard />},
-        { path: "createClaim" },
+        { path: "claimsdashboard", element: <ClaimsDashboard /> },
         {
           path: "createclaim",
           element: <CreateClaim />,
