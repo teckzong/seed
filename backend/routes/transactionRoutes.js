@@ -24,6 +24,10 @@ router.post('/', (req, res) => {
                 console.log(ip)
                 const currentDate = new Date();
                 const timestamp = currentDate.getTime();
+                con.query("select max(ClaimID) from InsuranceClaims", (err, result) =>{
+                    claim['ClaimID'] = result + 1;
+                })
+
                 claim['Status'] = "Pending";
                 claim['LastEditedClaimDate'] = timestamp;
                 con.query("INSERT INTO InsuranceClaims value ?", claim, (err, result) =>{
@@ -31,11 +35,6 @@ router.post('/', (req, res) => {
                         console.log("err")
                         //return res.status(422).send(resResult(0, "Save DB error"));//err.message
                     } else {
-                        //todo decide ltr
-                        // res.send({
-                        //     info : result,
-                        //     res: "User registered"
-                        // });
                         //res.send(resResult(1, 'Successfully create claim', null));
                         console.log("saved")
                     }
@@ -46,10 +45,6 @@ router.post('/', (req, res) => {
     catch(err){
         console.log(err)
     }
-
-
-
-
 
         //return res.status(422).send(resResult(0, "Save DB error"));//err.message
 
