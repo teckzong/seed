@@ -7,15 +7,22 @@ const requireAuth = require('../middlewares/requireAuth');
 /**
  * create
  */
-let insurancePolicy;
-function getInsurancePolicy (inId){
-    con.query("Select *, Timestamp(PolicyEndDate) as PolicyEndDate_ts from InsurancePolicies where InsuranceID = ?", inId, (err, result) =>{
-        insurancePolicy = result;
-    })
-}
+
+
 router.post('/', (req, res) => {
     const claim = req.body;
-    getInsurancePolicy(claim.InsuranceID);
+    let insurancePolicy
+    try{
+        con.query("Select *, Timestamp(PolicyEndDate) as PolicyEndDate_ts from InsurancePolicies where InsuranceID = ?", claim.InsuranceID, (err, result) =>{
+            insurancePolicy = result;
+        })
+
+    }
+    catch (err){
+        console.log(err.message)
+    }
+    console.log(insurancePolicy);
+
     if(!claim){
         console.log("err")
         //return res.status(422).send(resResult(0, "Claim is null!"));
