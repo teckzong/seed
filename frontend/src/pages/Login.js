@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
 import axios from 'axios';
 import AuthContext from "../context/AuthProvider";
+import { useCookies } from 'react-cookie';
 
 const LOGIN_URL = '/auth';
 
@@ -14,6 +15,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false)
+    const [cookies, setCookie] = useCookies(['user']);
 
     useEffect(() => {
         setErrMsg("");
@@ -38,6 +40,9 @@ const Login = () => {
             setNewUsername('');
             setPassword('');
             setSuccess(true);
+
+            setCookie('Employee ID', newUsername, { path: '/' });
+
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
