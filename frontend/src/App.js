@@ -29,11 +29,10 @@ function App() {
         { path: "removeClaim" },
         // { path: "/login", element: <Login /> },
         {
-          path: ":insuranceId/editClaim",
+          path: "editClaim",
           element: <EditClaim />,
           loader: claimInfoLoader,
           action: editClaimAction,
-          t,
         },
       ],
     },

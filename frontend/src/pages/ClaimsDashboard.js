@@ -52,7 +52,7 @@ const ClaimsDashboard = () => {
     const natigate = useNavigate();
      return (
     <>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={natigate("/editclaim")}>Edit Claim</button>
+      <a type="button" class="btn btn-secondary" data-dismiss="modal" href='/editclaim'>Edit Claim</a>
     </>)
   }
 
