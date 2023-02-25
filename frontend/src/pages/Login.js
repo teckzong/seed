@@ -25,7 +25,7 @@ const Login = () => {
             EmployeeID: parseInt(newUsername),
             Password: password,
         };
-
+        
         // fetch("/login", {
         //     method: "POST",
         //     headers: { 'Content-Type': 'application/json' },
