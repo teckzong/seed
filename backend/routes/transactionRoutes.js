@@ -12,41 +12,47 @@ const requireAuth = require('../middlewares/requireAuth');
 router.post('/', (req, res) => {
     const claim = req.body;
 
-    if(!claim){
+    if (!claim) {
         console.log("err")
         //return res.status(422).send(resResult(0, "Claim is null!"));
     }
-    try{
-        con.query("Select *, Timestamp(PolicyEndDate) as PolicyEndDate_ts from InsurancePolicies where InsuranceID = ?", claim.InsuranceID, (err, ip) =>{
-            if(claim.amount > ip.ClaimLimit || claim.ExpenseDate > ip.PolicyEndDate_ts){
-                // return res.status(422).send(resResult(0, "Invalid claim, please check amount or expense date"));
-                console.log("err")
-                console.log(ip)
-                const currentDate = new Date();
-                const timestamp = currentDate.getTime();
-                con.query("select max(ClaimID) from InsuranceClaims", (err, result) =>{
-                    claim['ClaimID'] = result + 1;
-                })
-
-                claim['Status'] = "Pending";
-                claim['LastEditedClaimDate'] = timestamp;
-                con.query("INSERT INTO InsuranceClaims value ?", claim, (err, result) =>{
-                    if(err){
-                        console.log("err")
-                        //return res.status(422).send(resResult(0, "Save DB error"));//err.message
-                    } else {
-                        //res.send(resResult(1, 'Successfully create claim', null));
-                        console.log("saved")
-                    }
-                });
-            }
+    try {
+        con.query("insert into insuranceClaims values ?", claim, (err, result) => {
+            console.log("sucessssss");
         })
-    }
-    catch(err){
+        // con.query("Select *, Timestamp(PolicyEndDate) as PolicyEndDate_ts from InsurancePolicies where InsuranceID = ?", claim.InsuranceID, (err, ip) => {
+        //     if (!ip) {
+        //         console.log("no ip");
+        //     }
+        //     if (claim.amount > ip.ClaimLimit || claim.ExpenseDate > ip.PolicyEndDate_ts) {
+        //         // return res.status(422).send(resResult(0, "Invalid claim, please check amount or expense date"));
+        //         console.log("err")
+        //         console.log(ip)
+        //         const currentDate = new Date();
+        //         const timestamp = currentDate.getTime();
+        //         con.query("select max(ClaimID) from InsuranceClaims", (err, result) => {
+        //             claim['ClaimID'] = result + 1;
+        //         })
+        //
+        //         claim['Status'] = "Pending";
+        //         claim['LastEditedClaimDate'] = timestamp;
+        //         con.query("INSERT INTO InsuranceClaims values ?", claim, (err, result) => {
+        //             if (err) {
+        //                 console.log("err")
+        //                 //return res.status(422).send(resResult(0, "Save DB error"));//err.message
+        //             } else {
+        //                 //res.send(resResult(1, 'Successfully create claim', null));
+        //                 console.log("saved")
+        //             }
+        //         });
+        //     }
+        // })
+
+    } catch (err) {
         console.log(err)
     }
 
-        //return res.status(422).send(resResult(0, "Save DB error"));//err.message
+    //return res.status(422).send(resResult(0, "Save DB error"));//err.message
 
 
 });
@@ -63,18 +69,32 @@ router.post('/', (req, res) => {
  * //     });
  * // });
  */
+
+router.get('get-claim/:cid', (req, res) => {
+    const cid = req.params.id;
+
+    try {
+        con.query("select * from InsuranceClaims where ClaimId = ?", cid, (err, result) => {
+            if (!result) {
+                console.log("no such claim")
+            } else {
+                return res.send(result);
+            }
+        })
+    } catch (err) {
+        return res.send(err)
+    }
+
+});
 router.post('/edit-claim/:cid', (req, res) => {
     const cid = req.params.id;
-    //const claim = find by cid
-    if(!claim){
-        return res.status(422).send(resResult(0, "Cannot find in db"));//err.message
+    const claim = req.body;
+    try {
+        con.query("select * from ")
+    } catch (err) {
+        console.log(err)
     }
-    try{
-        //edit status
-    }
-    catch (err){
-        return res.status(422).send(resResult(0, "Invalid Editing"));//err.message
-    }
+
 });
 
 /**
@@ -101,12 +121,12 @@ router.post('/remove-claim/:id', (req, res) => {
     // //         info : user,
     // //         res: "Successfully deleted"
     // //     });
-    con.query("INSERT INTO user SET ?", cUser, (err, result) =>{
-        if(err){
+    con.query("INSERT INTO user SET ?", cUser, (err, result) => {
+        if (err) {
             res.send(err);
         } else {
             res.send({
-                info : result,
+                info: result,
                 res: "User registered"
             });
         }
