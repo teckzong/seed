@@ -17,7 +17,7 @@ function App() {
       children: [
         { index: true, element: <Home /> },
         { path: "transactions", element: <Transaction /> },
-        { path: "claimsdashboard", element: <ClaimsDashboard /> },
+        { path: "dashboard", element: <ClaimsDashboard /> },
         {
           path: "createclaim",
           element: <CreateClaim />,
