@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "react-router-dom";
 
-const EditClaimForm = () => {
+const EditClaimForm = ({ data }) => {
   let [showInput, setShowInput] = useState(false);
   let changeHandler = () => {
     setShowInput((prevState) => {
@@ -22,6 +22,7 @@ const EditClaimForm = () => {
                 placeholder="Enter Insurance ID"
                 id="insuranceID"
                 name="insuranceID"
+                value={data.InsuranceID}
                 maxLength="50"
                 required
                 readOnly
@@ -36,6 +37,7 @@ const EditClaimForm = () => {
                 id="firstName"
                 name="firstName"
                 maxLength="50"
+                value={data.FirstName}
                 required
                 readOnly
               />
@@ -51,6 +53,7 @@ const EditClaimForm = () => {
                 maxLength="50"
                 required
                 readOnly
+                value={data.LastName}
               />
             </div>
             <div className="form-group">
@@ -61,6 +64,7 @@ const EditClaimForm = () => {
                 id="expenseDate"
                 name="expenseDate"
                 required
+                value={data.ExpenseDate}
               />
             </div>
             <div className="form-group">
@@ -72,6 +76,7 @@ const EditClaimForm = () => {
                 id="amount"
                 name="amount"
                 required
+                value={data.Amount}
               />
             </div>
             <div className="form-group">
@@ -83,9 +88,10 @@ const EditClaimForm = () => {
                 id="purpose"
                 name="purpose"
                 required
+                value={data.Purpose}
               />
             </div>
-            <div className="form-group form-check">
+            {/* <div className="form-group form-check">
               <label htmlFor="followup" className="form-check-label">
                 <input
                   id="followUp"
@@ -93,12 +99,12 @@ const EditClaimForm = () => {
                   className="form-check-input"
                   type="checkbox"
                   onChange={changeHandler}
-                  value={showInput}
+                  value={}
                 />
                 Follow Up
               </label>
-            </div>
-            {showInput && (
+            </div> */}
+            {/* {showInput && (
               <div className="form-group">
                 <label htmlFor="previousClaimID">Previous Claim ID:</label>
                 <input
@@ -110,17 +116,18 @@ const EditClaimForm = () => {
                   required
                 />
               </div>
-            )}
+            )} */}
             <div className="form-group">
-              <label htmlFor="status">Status:</label>
-              <input
-                type="text"
+              <select
                 className="form-control"
-                placeholder="State"
                 id="status"
                 name="status"
                 required
-              />
+              >
+                <option value="approved">approved</option>
+                <option value="pending">pending</option>
+                <option value="rejected">rejected</option>
+              </select>
             </div>
 
             {/* <div className="form-group">
