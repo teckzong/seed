@@ -6,7 +6,7 @@ const transRoutes = require('./routes/transactionRoutes.js');
 
 const app = express();
 //port env for listening
-const port = process.env.PORT || 3001; 
+const port = process.env.PORT || 3000; 
 app.use(express.json());
 
 app.use('/users', userRoutes);
