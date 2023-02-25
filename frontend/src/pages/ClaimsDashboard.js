@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const ClaimsDashboard = () => {
-  const employeeClaims = [];
+  const [employeeClaims, setEmployeeClaims] = useState([]);
   const [pendingClaims, setPendingClaims] = useState([]);
   const [approvedClaims, setApprovedClaims] = useState([]);
   const [rejectedClaims, setRejectedClaims] = useState([]);
@@ -76,6 +76,13 @@ const ClaimsDashboard = () => {
   }
 
   return (
+    <>
+      <div class="position-relative overflow-hidden p-1 p-md-3 m-md-1 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+          <h1 class="display-4 font-weight-heavy">Welcome to your claims dashboard</h1>
+        </div>
+           
+    </div>
     <table className="table table-striped table-bordered table-sm">
       <thead>
         <tr>
@@ -117,6 +124,7 @@ const ClaimsDashboard = () => {
         })}
       </tbody>
     </table>
+    </>
   );
 
   // [ {
