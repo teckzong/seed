@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
             if(claim.amount > ip.ClaimLimit || claim.ExpenseDate > ip.PolicyEndDate_ts){
                 // return res.status(422).send(resResult(0, "Invalid claim, please check amount or expense date"));
                 console.log("err")
-
+                console.log(ip)
                 const currentDate = new Date();
                 const timestamp = currentDate.getTime();
                 claim['Status'] = "Pending";
