@@ -33,5 +33,5 @@ export const action = async ({ params, request }) => {
   //     throw json({ error: 404, message: "error creating claim" });
   //   }
   window.alert("Successfully created claim");
-  return redirect("/dashboard");
+  return redirect("/claimdashboard");
 };

@@ -20,7 +20,6 @@ function App() {
         {
           path: "createclaim",
           element: <CreateClaim />,
-          // action: CreateClaimAction,
           action: CreateClaimAction,
         },
         { path: "editClaim" },
