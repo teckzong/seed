@@ -1,26 +1,13 @@
-<<<<<<< HEAD
-import React, { useEffect } from "react";
-import { useState, useRef } from "react";
-
-const Login = () => {
-
-    const database = {
-        "EmployeeID": "58001001",
-        "Password": "iLoveTT!23",
-    };
-
-=======
 import React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
 import axios from 'axios';
 import AuthContext from "../context/AuthProvider";
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
 
 const LOGIN_URL = '/auth';
 
 const Login = () => {
     const { setAuth } = useContext(AuthContext);
->>>>>>> front-dev-nazri
     const userRef = useRef();
     const errRef = useRef();
 
@@ -28,10 +15,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false)
-<<<<<<< HEAD
-=======
-    const [cookies, setCookie] = useCookies(['user']);
->>>>>>> front-dev-nazri
+    // const [cookies, setCookie] = useCookies(['user']);
 
     useEffect(() => {
         setErrMsg("");
@@ -39,38 +23,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-<<<<<<< HEAD
-        console.log(newUsername, password);
-        setNewUsername("");
-        setPassword("");
-        setSuccess(true)
-
-        return (
-            console.log("submitted")
-        );
-    }
-
-return (
-    <div className="login">
-        <p> Login to view your insurance claims and policies</p>
-        <form onSubmit={handleSubmit}>
-            <p>
-                <label>Employee ID</label>
-                <input type="text" id="username" onChange={(e) => setNewUsername(e.target.value)} autocomplete="off" value={newUsername} required></input>
-            </p>
-            <p>
-                <label>Password</label>
-                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} autocomplete="off" value={password} required></input>
-            </p>
-
-            <button>Login</button>
-
-            <p>{newUsername}</p>
-            <p>{password}</p>
-        </form>
-    </div>
-);
-=======
 
         try {
             const response = await axios.post(LOGIN_URL,
@@ -89,7 +41,7 @@ return (
             setPassword('');
             setSuccess(true);
 
-            setCookie('Employee ID', newUsername, { path: '/' });
+            // setCookie('Employee ID', newUsername, { path: '/' });
 
         } catch (err) {
             if (!err?.response) {
@@ -145,7 +97,6 @@ return (
             )}
         </>
     )
->>>>>>> front-dev-nazri
 
 };
 
