@@ -77,6 +77,7 @@ const Login = () => {
                         </div>
                         <h2 className="loginText"> Login to view your insurance claims and policies </h2>
                         <form className="loginForm" onSubmit={handleSubmit}>
+                            <div className="inputWrapper">
                             <p>
                                 <label>Employee ID: </label>
                                 <input type="text" id="username" onChange={(e) => setNewUsername(e.target.value)} autoComplete="off" value={newUsername} required></input>
@@ -86,11 +87,10 @@ const Login = () => {
                                 <label>Password: </label>
                                 <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} autoComplete="off" value={password} required></input>
                             </p>
-
+                            
                             <button>Login</button>
 
-                            <p>{newUsername}</p>
-                            <p>{password}</p>
+                            </div>
                         </form>
                     </div>
                 </section>
