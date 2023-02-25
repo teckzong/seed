@@ -15,7 +15,7 @@ function getInsurancePolicy (inId){
 }
 router.post('/create-claim', (req, res) => {
     const claim = req.body;
-
+    getInsurancePolicy(claim.InsuranceID);
     if(!claim){
         return res.status(422).send(resResult(0, "Claim is null!"));
     }
