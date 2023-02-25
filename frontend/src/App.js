@@ -4,9 +4,9 @@ import Home from "./pages/Home";
 import Transaction from "./pages/Transaction";
 import Root from "./pages/Root";
 import Error from "./pages/Error";
-import MainDashBoard from "./pages/MainDashBoard";
 import ClaimsDashboard from "./pages/ClaimsDashboard";
-
+import CreateClaim, { action as CreateClaimAction } from "./pages/CreateClaim";
+import Login from "./pages/Login";
 function App() {
   let router = createBrowserRouter([
     {
@@ -15,12 +15,16 @@ function App() {
       errorElement: <Error />,
       children: [
         { index: true, element: <Home /> },
-        { path: "main", element: <MainDashBoard /> },
         { path: "transactions", element: <Transaction /> },
-        { path: "claimsdashboard", element: <ClaimsDashboard />},
-        { path: "createClaim" },
+        { path: "claimsdashboard", element: <ClaimsDashboard /> },
+        {
+          path: "createclaim",
+          element: <CreateClaim />,
+          action: CreateClaimAction,
+        },
         { path: "editClaim" },
         { path: "removeClaim" },
+        { path: "/login", element: <Login /> },
       ],
     },
   ]);

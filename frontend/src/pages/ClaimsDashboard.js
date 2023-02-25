@@ -42,9 +42,11 @@ const ClaimsDashboard = () => {
         }
     });
 
-    let i = 0;
+    let ClaimNumber = 0;
+    const dateFormat = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
     return (
-        <table class="table">
+        <table class="table table-striped table-bordered table-sm">
       <thead>
         <tr>
             <th></th>
@@ -65,20 +67,20 @@ const ClaimsDashboard = () => {
       <tbody>
         {employeeClaims.map((claim) => {
             console.log(claim);
-            i++;
-            return (<tr key={i}>
-                <td>{i}</td>
+            ClaimNumber++;
+            return (<tr key={ClaimNumber}>
+                <td>{ClaimNumber}</td>
                 <td>{claim["ClaimID"]}</td>
                 <td>{claim["InsuranceID"]}</td>
                 <td>{claim["FirstName"]}</td>
                 <td>{claim["LastName"]}</td>
-                <td>{claim["ExpenseDate"]}</td>
+                <td>{Date(Date.parse(claim["ExpenseDate"]))}</td>
                 <td>{claim["Amount"]}</td>
                 <td>{claim["Purpose"]}</td>
-                <td>{claim["FollowUp"]}</td>
+                <td>{claim["FollowUp"] ? 'Yes': 'No'}</td>
                 <td>{claim["PreviousClaimID"]}</td>
                 <td>{claim["Status"]}</td>
-                <td>{claim["LastEditedClaimDate"]}</td>
+                <td>{Date(Date.parse(claim["LastEditedClaimDate"]))}</td>
             </tr>)
         })}
       </tbody>
