@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import axios from "axios";
+import {useNavigate} from "react-router-dom"
 
 const ClaimsDashboard = () => {
-  const employeeClaims = [];
+  const [employeeClaims, setEmployeeClaims] = useState([]);
   const [pendingClaims, setPendingClaims] = useState([]);
   const [approvedClaims, setApprovedClaims] = useState([]);
   const [rejectedClaims, setRejectedClaims] = useState([]);
@@ -48,7 +48,49 @@ const ClaimsDashboard = () => {
     day: "numeric",
   };
 
+  const EditButton = (claimID) => {
+    const natigate = useNavigate();
+     return (
+    <>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={natigate("/editclaim")}>Edit Claim</button>
+    </>)
+  }
+
+  const deleteButton = (claimID) => {
+    return (
+    <><button type="button" class="btn btn-danger" data-target="#deleteModal" data-toggle="modal">Delete Item</button><div class="modal fade" id="deleteModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete your claim?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-modal">No</button>
+              <button type="button" class="btn btn-danger"  data-dismiss="modal" onClick={deleteRequest(claimID)}>Yes</button>
+            </div>
+          </div>
+        </div>
+      </div></>)
+  }
+
+  const deleteRequest = (claimID) => {
+    
+  }
+
   return (
+    <>
+      <div class="position-relative overflow-hidden p-1 p-md-3 m-md-1 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+          <h1 class="display-4 font-weight-heavy">Welcome to your claims dashboard</h1>
+        </div>
+           
+    </div>
     <table className="table table-striped table-bordered table-sm">
       <thead>
         <tr>
@@ -84,11 +126,13 @@ const ClaimsDashboard = () => {
               <td>{claim["PreviousClaimID"]}</td>
               <td>{claim["Status"]}</td>
               <td>{Date(Date.parse(claim["LastEditedClaimDate"]))}</td>
+              <td>{EditButton(claim["ClaimID"])}{deleteButton(claim["ClaimID"])}</td>
             </tr>
           );
         })}
       </tbody>
     </table>
+    </>
   );
 
   // [ {
