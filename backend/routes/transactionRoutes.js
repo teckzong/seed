@@ -14,7 +14,6 @@ router.post('/', (req, res) => {
     console.log(claim);
     if(!claim){
         console.log("err")
-        //return res.status(422).send(resResult(0, "Claim is null!"));
     }
     try{
         con.query("INSERT INTO insuranceclaims SET ?", claim, (err, result) =>{
@@ -33,5 +32,6 @@ router.post('/', (req, res) => {
     }
 
 });
+
 
 module.exports = router;
