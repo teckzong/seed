@@ -3,6 +3,11 @@ import { useState, useRef } from "react";
 
 const Login = () => {
 
+    const database = {
+        "EmployeeID": "58001001",
+        "Password": "iLoveTT!23",
+    };
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -15,14 +20,17 @@ const Login = () => {
         setErrMsg("");
     }, [newUsername, password])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(newUsername, password);
         setNewUsername("");
         setPassword("");
         setSuccess(true)
 
-        return (console.log("success"));
+        return (
+            console.log("submitted")
+        );
+    }
 
 return (
     <div className="login">
