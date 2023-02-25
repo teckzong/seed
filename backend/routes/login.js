@@ -4,18 +4,26 @@ const con = require('../connection.js');
 
 
 router.post('/', (req, res) => {
-    const { EmployeeId, Password } = req.body;
-    con.query("select * from user where EmployeeID = ?", EmployeeId,(err, result) =>{
+    const { EmployeeID, Password } = req.body;
+    con.query("select * from user where EmployeeID = ?", EmployeeID,(err, result) =>{
         if(err){
-            res.send(err);
+            res.send({
+                code: 0,
+                message: "Login fail",
+                data: err
+            });
         } else {
             if(Password == result[0].Password){
                 res.send({
-                    message : result
+                    code: 1,
+                    message : "Login Success",
+                    data: result[0].EmployeeID
                 });
             } else{
                 res.send({
-                    message : "Incorrect user or password"
+                    code: 0,
+                    message : "Incorrect user or password",
+                    data: err
                 });
             }
             

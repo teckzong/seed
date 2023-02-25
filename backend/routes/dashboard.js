@@ -4,7 +4,7 @@ const con = require('../connection.js');
 
 
 router.get('/', (req, res) => {
-    const {EmployeeId} = req.body;
+    const { EmployeeID } = req.body;
 
     con.query(`SELECT IC.*
     FROM InsuranceClaims IC LEFT JOIN InsurancePolicies IP

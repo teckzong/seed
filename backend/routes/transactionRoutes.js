@@ -2,32 +2,24 @@ const express = require('express');
 const router = express.Router();
 const con = require('../connection.js');
 
+router.get('/', (req, res) => {
+    const {InsuranceID}= req.body;
 
-router.get('/delete-claim', (req, res) => {
-    const {ClaimID} = req.body;
-    con.query(`SELECT Status
-    FROM InsuranceClaims
-    WHERE claimID = ?`, ClaimID, (err, claim_status));
-
-    if (claim_status.status == 'Approved'){
-        return res.send({
-            message : "Approved claim cannot be deleted."
-        });
-    } elif (claim_status == null){
-        return res.send({
-            message : "Claim does not exist."
-        });
-    }
-
-    con.query(`DELETE FROM InsuranceClaims WHERE claimID = ?`
-    ,ClaimID, (err, result) =>{
+    con.query("select ClaimID from insuranceclaims where InsuranceID = ?", InsuranceID,(err, result) =>{
         if(err){
-            res.send(err);
+            res.send({
+                code: "0",
+                message : "unsuccessfully get claims",
+                data : err
+            });
         } else {
-            res.send(result);
+            res.send({
+                code: "1",
+                message : "successfully get claims",
+                data : result
+            });
         }
     });
 });
 
 module.exports = router;
-
