@@ -13,15 +13,17 @@ function getInsurancePolicy (inId){
         insurancePolicy = result;
     })
 }
-router.post('/create-claim', (req, res) => {
+router.post('/', (req, res) => {
     const claim = req.body;
     getInsurancePolicy(claim.InsuranceID);
     if(!claim){
-        return res.status(422).send(resResult(0, "Claim is null!"));
+        console.log("err")
+        //return res.status(422).send(resResult(0, "Claim is null!"));
     }
 
     if(claim.amount > insurancePolicy.ClaimLimit || claim.ExpenseDate > insurancePolicy.PolicyEndDate_ts){
-        return res.status(422).send(resResult(0, "Invalid claim, please check amount or expense date"));
+        // return res.status(422).send(resResult(0, "Invalid claim, please check amount or expense date"));
+        console.log("err")
     }
 
         const currentDate = new Date();
@@ -30,19 +32,21 @@ router.post('/create-claim', (req, res) => {
         claim['LastEditedClaimDate'] = timestamp;
         con.query("INSERT INTO InsuranceClaims value ?", claim, (err, result) =>{
             if(err){
-                return res.status(422).send(resResult(0, "Save DB error"));//err.message
+                console.log("err")
+                //return res.status(422).send(resResult(0, "Save DB error"));//err.message
             } else {
                 //todo decide ltr
                 // res.send({
                 //     info : result,
                 //     res: "User registered"
                 // });
-                res.send(resResult(1, 'Successfully create claim', null));
+                //res.send(resResult(1, 'Successfully create claim', null));
+                console.log("saved")
             }
         });
 
 
-        return res.status(422).send(resResult(0, "Save DB error"));//err.message
+        //return res.status(422).send(resResult(0, "Save DB error"));//err.message
 
 
 });
