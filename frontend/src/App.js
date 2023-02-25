@@ -6,6 +6,7 @@ import Root from "./pages/Root";
 import Error from "./pages/Error";
 import MainDashBoard from "./pages/MainDashBoard";
 import ClaimsDashboard from "./pages/ClaimsDashboard";
+import CreateClaim, { action as CreateClaimAction } from "./pages/CreateClaim";
 
 function App() {
   let router = createBrowserRouter([
@@ -19,6 +20,11 @@ function App() {
         { path: "transactions", element: <Transaction /> },
         { path: "claimsdashboard", element: <ClaimsDashboard />},
         { path: "createClaim" },
+        {
+          path: "createclaim",
+          element: <CreateClaim />,
+          action: CreateClaimAction,
+        },
         { path: "editClaim" },
         { path: "removeClaim" },
       ],
