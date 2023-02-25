@@ -112,15 +112,16 @@ const EditClaimForm = () => {
               </div>
             )}
             <div className="form-group">
-              <label htmlFor="status">Status:</label>
-              <input
-                type="text"
+              <select
                 className="form-control"
-                placeholder="State"
                 id="status"
                 name="status"
                 required
-              />
+              >
+                <option value="approved">approved</option>
+                <option value="pending">pending</option>
+                <option value="rejected">rejected</option>
+              </select>
             </div>
 
             {/* <div className="form-group">

@@ -25,7 +25,11 @@ function App() {
         },
         { path: "removeClaim" },
         // { path: "/login", element: <Login /> },
-        { path: "editClaim", element: <EditClaim />, loader: claimInfoLoader },
+        {
+          path: ":insuranceId/editClaim",
+          element: <EditClaim />,
+          loader: claimInfoLoader,
+        },
       ],
     },
   ]);
