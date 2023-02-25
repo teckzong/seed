@@ -3,7 +3,7 @@ const router = express.Router();
 const con = require('../connection.js');
 const {resResult, sendError} = require("../comments/constants");
 const requireAuth = require('../middlewares/requireAuth');
-router.use(requireAuth);//require to sign in first
+//router.use(requireAuth);//require to sign in first
 /**
  * create
  */
