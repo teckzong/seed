@@ -1,11 +1,28 @@
 import React from "react";
-import { redirect } from "react-router-dom";
+import { json, redirect, useLoaderData } from "react-router-dom";
 
 const EditClaimPage = () => {
+  const claimData = useLoaderData();
   return <div></div>;
 };
 
 export default EditClaimPage;
+
+export const loader = async ({ params, request }) => {
+  console.log("retrieving suppose data");
+  return {};
+  // let response = await fetch("http:localhost:8080", {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  // if (!response.ok) {
+  //   throw json({ code: 404, message: "unable to edit data" });
+  // }
+  // let data = await (await response).json();
+  // return data;
+};
 
 export const action = async ({ params, request }) => {
   console.log("here");
