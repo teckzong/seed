@@ -1,6 +1,5 @@
 const express = require('express');
 const userRoutes = require('./routes/users.js');
-const transRoutes = require('./routes/transactionRoutes.js');
 
 const app = express();
 //port env for listening
@@ -8,7 +7,6 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use('/users', userRoutes);
-app.use('/trans', transRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello world!');
